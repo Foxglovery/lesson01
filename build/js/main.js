@@ -32,6 +32,7 @@ const addAll = (a, b, c) => {
     }
     return a + b;
 };
+// notice the play with default values
 const SumAll = (a = 10, b, c = 2) => {
     //need a type guard to fix the undefined c parameter and any undefined parameters need to be last
     return a + b + c;
@@ -39,5 +40,29 @@ const SumAll = (a = 10, b, c = 2) => {
 logMsg(addAll(2, 3, 7));
 logMsg(addAll(2, 3));
 logMsg(SumAll(2, 3));
-// if a is hard coded, must pass in undefined as placeholder for parameter HOWEVER c is fine because it is at the end
+// if a has default value, must pass in undefined as placeholder for parameter HOWEVER c is fine because it is at the end
 logMsg(SumAll(undefined, 3));
+// Rest parameters
+// parameters passed in are not an array but using the rest operator forms an array which can be manipulated using reduce.
+// The rest operator goes last in the parameters
+const total = (a, ...nums) => {
+    return a + nums.reduce((prev, curr) => prev + curr);
+};
+logMsg(total(10, 2, 3, 4));
+// THE NEVER TYPE
+// type meant for returning errors or loop containing 
+const createError = (errorMsg) => {
+    throw new Error(errorMsg);
+};
+//custom type guard
+const isNumber = (value) => {
+    return typeof value === 'number' ? true : false;
+};
+//use of never type
+const numberOrString = (value) => {
+    if (typeof value === 'string')
+        return 'string';
+    if (isNumber(value))
+        return 'number';
+    return createError('this should never happen');
+};
