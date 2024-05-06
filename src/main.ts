@@ -122,7 +122,7 @@ let a: One = 'hello'
 let b = a as Two // less specific
 let c = a as Three // more specific
 
-// angle brackets cant be used in React!!!!!!!!!!!!!!
+// angle brackets cant be used in React!!!!!!!!!!!!!!!
 let d = <One>'world'
 let e = <string | number>'world'
 
