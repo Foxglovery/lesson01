@@ -131,3 +131,9 @@ const addOrConcat = (a: number, b: number, c: 'add' | 'concat')
     if (c === 'add') return a + b
     return '' + a + b
 }
+
+// use assertion to tell ts we want to return that type
+let myVal: string = addOrConcat(2, 2, 'concat') as string
+
+// Be careful, TS will allow this but a string is returned.
+let nextVal: number = addOrConcat(2, 2, 'concat') as number
