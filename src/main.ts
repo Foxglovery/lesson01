@@ -137,3 +137,16 @@ let myVal: string = addOrConcat(2, 2, 'concat') as string
 
 // Be careful, TS will allow this but a string is returned.
 let nextVal: number = addOrConcat(2, 2, 'concat') as number
+
+//Double casting or force casting. It overules TS.
+// 10 as string
+(10 as unknown) as string
+
+// The DOM
+const img = document.getElementById('#img') as HTMLImageElement
+// using a Bang or non-null assertion will force it
+const myImg = document.querySelector('img') as HTMLImageElement
+const angleBracketImg = <HTMLImageElement>document.querySelector('img')
+
+img.src
+myImg.src

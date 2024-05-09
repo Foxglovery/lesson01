@@ -13,3 +13,17 @@ const addOrConcat = (a, b, c) => {
         return a + b;
     return '' + a + b;
 };
+// use assertion to tell ts we want to return that type
+let myVal = addOrConcat(2, 2, 'concat');
+// Be careful, TS will allow this but a string is returned.
+let nextVal = addOrConcat(2, 2, 'concat');
+//Double casting or force casting. It overules TS.
+// 10 as string
+10;
+// The DOM
+const img = document.getElementById('#img');
+// using a Bang or non-null assertion will force it
+const myImg = document.querySelector('img');
+const angleBracketImg = document.querySelector('img');
+img.src;
+myImg.src;
