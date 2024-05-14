@@ -112,7 +112,17 @@
 // img.src
 // myImg.src
 class Coder {
+    // name: string
+    // music: string
+    // age: number
+    // lang: string
+    //adding public to the declarations makes them a VISIBILITY MODIFIER
+    // then the above declarations can be DRIED
     constructor(name, music, age, lang) {
+        this.name = name;
+        this.music = music;
+        this.age = age;
+        this.lang = lang;
         this.name = name;
         this.music = music;
         this.age = age;
