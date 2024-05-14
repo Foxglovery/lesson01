@@ -118,7 +118,7 @@ class Coder {
     // lang: string
     //adding public to the declarations makes them a VISIBILITY MODIFIER
     // then the above declarations can be DRIED
-    constructor(name, music, age, lang) {
+    constructor(name, music, age, lang = 'Typescript') {
         this.name = name;
         this.music = music;
         this.age = age;
@@ -128,4 +128,29 @@ class Coder {
         this.age = age;
         this.lang = lang;
     }
+    // add a method to be able to get private age
+    getAge() {
+        return `Hello, i'm ${this.age}`;
+    }
 }
+const Gabe = new Coder('Gabe', 'Rock', 42);
+console.log(Gabe.getAge());
+//age is private
+// console.log(Gabe.age)
+// EXTENDING THE CLASS
+class WebDev extends Coder {
+    constructor(computer, name, music, age) {
+        // feed the super the declarations to make ts okay
+        super(name, music, age);
+        this.computer = computer;
+        this.computer = computer;
+    }
+    getLang() {
+        return `I write ${this.lang}`;
+    }
+}
+const Sara = new WebDev('Mac', 'Sara', 'Lofi', 25);
+console.log(Sara.getLang());
+// console.log(Sara.age)
+// console.log(Sara.lang)
+///////////////////////////////////////////////////

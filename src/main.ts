@@ -153,6 +153,10 @@
 // myImg.src
 
 class Coder {
+
+    //this will overide, BE CAREFUL
+    secondLang!: string
+
     // name: string
     // music: string
     // age: number
@@ -164,11 +168,45 @@ class Coder {
         public readonly name: string,
         public music: string,
         private age: number,
-        protected lang: string
+        protected lang: string = 'Typescript'
     ) {
         this.name = name
         this.music = music
         this.age = age
         this.lang = lang
     }
+    // add a method to be able to get private age
+    public getAge() {
+        return `Hello, i'm ${this.age}`
+    }
 }
+
+const Gabe = new Coder('Gabe', 'Rock', 42)
+console.log(Gabe.getAge())
+//age is private
+// console.log(Gabe.age)
+
+// EXTENDING THE CLASS
+class WebDev extends Coder {
+    constructor(
+        public computer: string,
+        name: string,
+        music: string,
+        age: number,
+    ) {
+        // feed the super the declarations to make ts okay
+        super(name, music, age)
+        this.computer = computer
+    }
+    public getLang() {
+        return `I write ${this.lang}`
+    }
+}
+
+const Sara = new WebDev('Mac', 'Sara', 'Lofi', 25)
+console.log(Sara.getLang())
+// console.log(Sara.age)
+// console.log(Sara.lang)
+///////////////////////////////////////////////////
+
+
