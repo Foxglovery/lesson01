@@ -1,6 +1,7 @@
 // // Type Aliases for basic types and functions
 // type stringOrNumber = string | number
 
+
 // type stringOrNumberArray = (stringOrNumber)[]
 // // type definitions normally go up top !!!
 // type mathFunction = (a: number, b: number) => number
@@ -110,43 +111,64 @@
 //     return createError('this should never happen')
 // }
 
-// CHAPTER 5 TYPE ASSERTION
+// // CHAPTER 5 TYPE ASSERTION
 
-type One = string
-type Two = string | number
-type Three = 'hello'
+// type One = string
+// type Two = string | number
+// type Three = 'hello'
 
-// convert to more or less specific type
+// // convert to more or less specific type
 
-let a: One = 'hello'
-let b = a as Two // less specific
-let c = a as Three // more specific
+// let a: One = 'hello'
+// let b = a as Two // less specific
+// let c = a as Three // more specific
 
-// angle brackets cant be used in React!!!!!!!!!!!!!!!
-let d = <One>'world'
-let e = <string | number>'world'
+// // angle brackets cant be used in React!!!!!!!!!!!!!!!
+// let d = <One>'world'
+// let e = <string | number>'world'
 
-const addOrConcat = (a: number, b: number, c: 'add' | 'concat')
-    : number | string => {
-    if (c === 'add') return a + b
-    return '' + a + b
+// const addOrConcat = (a: number, b: number, c: 'add' | 'concat')
+//     : number | string => {
+//     if (c === 'add') return a + b
+//     return '' + a + b
+// }
+
+// // use assertion to tell ts we want to return that type
+// let myVal: string = addOrConcat(2, 2, 'concat') as string
+
+// // Be careful, TS will allow this but a string is returned.
+// let nextVal: number = addOrConcat(2, 2, 'concat') as number
+
+// //Double casting or force casting. It overules TS.
+// // 10 as string
+// (10 as unknown) as string
+
+// // The DOM
+// const img = document.getElementById('#img') as HTMLImageElement
+// // using a Bang or non-null assertion will force it
+// const myImg = document.querySelector('img') as HTMLImageElement
+// const angleBracketImg = <HTMLImageElement>document.querySelector('img')
+
+// img.src
+// myImg.src
+
+class Coder {
+    // name: string
+    // music: string
+    // age: number
+    // lang: string
+
+    //adding public to the declarations makes them a VISIBILITY MODIFIER
+    // then the above declarations can be DRIED
+    constructor(
+        public readonly name: string,
+        public music: string,
+        private age: number,
+        protected lang: string
+    ) {
+        this.name = name
+        this.music = music
+        this.age = age
+        this.lang = lang
+    }
 }
-
-// use assertion to tell ts we want to return that type
-let myVal: string = addOrConcat(2, 2, 'concat') as string
-
-// Be careful, TS will allow this but a string is returned.
-let nextVal: number = addOrConcat(2, 2, 'concat') as number
-
-//Double casting or force casting. It overules TS.
-// 10 as string
-(10 as unknown) as string
-
-// The DOM
-const img = document.getElementById('#img') as HTMLImageElement
-// using a Bang or non-null assertion will force it
-const myImg = document.querySelector('img') as HTMLImageElement
-const angleBracketImg = <HTMLImageElement>document.querySelector('img')
-
-img.src
-myImg.src
