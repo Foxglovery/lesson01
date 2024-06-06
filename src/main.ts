@@ -360,3 +360,23 @@ const logStudentKey = (studet: Student, key: keyof Student): void => {
     console.log(`Student ${key}: ${student[key]}`)
 }
 logStudentKey(student, 'classes')
+
+
+/////////////////////////////
+// interface Incomes {
+//     [key: string]: number
+// }
+
+type Streams = 'salary' | 'bonus' | 'sidehustle'
+// utility type Record allows literals
+type Incomes = Record<Streams, number | string>
+
+const monthlyIncomes: Incomes = {
+    salary: 500,
+    bonus: 100,
+    sidehustle: 250
+}
+
+for (const revenue in monthlyIncomes) {
+    console.log(monthlyIncomes[revenue as keyof Incomes])
+}
