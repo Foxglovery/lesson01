@@ -1,6 +1,8 @@
 // // Type Aliases for basic types and functions
 // type stringOrNumber = string | number
 
+import { CookieSharp } from "@mui/icons-material"
+
 
 // type stringOrNumberArray = (stringOrNumber)[]
 // // type definitions normally go up top !!!
@@ -152,61 +154,157 @@
 // img.src
 // myImg.src
 
-class Coder {
+// class Coder {
 
-    //this will overide, BE CAREFUL
-    secondLang!: string
+//     //this will overide, BE CAREFUL
+//     secondLang!: string
 
-    // name: string
-    // music: string
-    // age: number
-    // lang: string
+//     // name: string
+//     // music: string
+//     // age: number
+//     // lang: string
 
-    //adding public to the declarations makes them a VISIBILITY MODIFIER
-    // then the above declarations can be DRIED
-    constructor(
-        public readonly name: string,
-        public music: string,
-        private age: number,
-        protected lang: string = 'Typescript'
-    ) {
-        this.name = name
-        this.music = music
-        this.age = age
-        this.lang = lang
-    }
-    // add a method to be able to get private age
-    public getAge() {
-        return `Hello, i'm ${this.age}`
-    }
+//     //adding public to the declarations makes them a VISIBILITY MODIFIER
+//     // then the above declarations can be DRIED
+//     constructor(
+//         public readonly name: string,
+//         public music: string,
+//         private age: number,
+//         protected lang: string = 'Typescript'
+//     ) {
+//         this.name = name
+//         this.music = music
+//         this.age = age
+//         this.lang = lang
+//     }
+//     // add a method to be able to get private age
+//     public getAge() {
+//         return `Hello, i'm ${this.age}`
+//     }
+// }
+
+// const Gabe = new Coder('Gabe', 'Rock', 42)
+// console.log(Gabe.getAge())
+// //age is private
+// // console.log(Gabe.age)
+
+// // EXTENDING THE CLASS
+// class WebDev extends Coder {
+//     constructor(
+//         public computer: string,
+//         name: string,
+//         music: string,
+//         age: number,
+//     ) {
+//         // feed the super the declarations to make ts okay
+//         super(name, music, age)
+//         this.computer = computer
+//     }
+//     public getLang() {
+//         return `I write ${this.lang}`
+//     }
+// }
+
+// const Sara = new WebDev('Mac', 'Sara', 'Lofi', 25)
+// console.log(Sara.getLang())
+// // console.log(Sara.age)
+// // console.log(Sara.lang)
+// ///////////////////////////////////////////////////
+
+
+// interface Musician {
+//     name: string,
+//     instrument: string,
+//     play(action: string): string
+// }
+
+// class Guitarist implements Musician {
+//     name: string
+//     instrument: string
+
+//     constructor(name: string, instrument: string) {
+//         this.name = name
+//         this.instrument = instrument
+//     }
+
+//     play(action: string): string {
+//         return `${this.name} ${action} the ${this.instrument}`
+//     }
+// }
+
+// const Page = new Guitarist('Jimmy', 'guitar')
+// console.log(Page.play('strums'))
+// //////////////////////////////////////
+// //   STATIC KEYWORD
+// class Peeps {
+//     // static properties are kept track of directly in the class
+//     // not in any one instantiation of the class
+//     static count: number = 0
+
+//     static getCount(): number {
+//         return Peeps.count
+//     }
+
+//     public id: number
+//     constructor(public name: string) {
+//         this.name = name
+//         //the ++ on the right increases first
+//         this.id = ++Peeps.count
+//     }
+// }
+
+// const John = new Peeps('John')
+// const Steve = new Peeps('STeve')
+// const Amy = new Peeps('Amy')
+
+// console.log(Steve.id)
+// console.log(Peeps.count)
+
+// ////////////////////////////////
+// // GETTERS AND SETTERS
+
+// class Bands {
+//     private dataState: string[]
+
+//     constructor() {
+//         this.dataState = []
+//     }
+
+//     public get data(): string[] {
+//         return this.dataState
+//     }
+
+//     public set data(value: string[]) {
+//         if (Array.isArray(value) && value.every(el => typeof el === 'string')) {
+//             this.dataState = value
+//             return
+//         } else throw new Error('Param is not an array of strings')
+//     }
+// }
+
+// const MyBands = new Bands()
+// MyBands.data = ['Barty Doyle', 'Patty lupone']
+// console.log(MyBands.data)
+// MyBands.data = [...MyBands.data, 'Cher']
+// console.log(MyBands.data)
+
+
+// Index Signatures
+
+interface TransactionObj {
+    Pizza: number,
+    Books: number,
+    Job: number
 }
 
-const Gabe = new Coder('Gabe', 'Rock', 42)
-console.log(Gabe.getAge())
-//age is private
-// console.log(Gabe.age)
-
-// EXTENDING THE CLASS
-class WebDev extends Coder {
-    constructor(
-        public computer: string,
-        name: string,
-        music: string,
-        age: number,
-    ) {
-        // feed the super the declarations to make ts okay
-        super(name, music, age)
-        this.computer = computer
-    }
-    public getLang() {
-        return `I write ${this.lang}`
-    }
+const todaysTransactions: TransactionObj = {
+    Pizza: -10,
+    Books: -5,
+    Job: 50
 }
 
-const Sara = new WebDev('Mac', 'Sara', 'Lofi', 25)
-console.log(Sara.getLang())
-// console.log(Sara.age)
-// console.log(Sara.lang)
-///////////////////////////////////////////////////
+console.log(todaysTransactions.Pizza)
 
-
+//Dynamically
+let prop: string = 'Pizza'
+console.log(todaysTransactions[prop])
