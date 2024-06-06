@@ -1,7 +1,7 @@
 // // Type Aliases for basic types and functions
 // type stringOrNumber = string | number
 
-import { CookieSharp } from "@mui/icons-material"
+
 
 
 // type stringOrNumberArray = (stringOrNumber)[]
@@ -292,10 +292,15 @@ import { CookieSharp } from "@mui/icons-material"
 // Index Signatures
 
 interface TransactionObj {
+    readonly [index: string]: number
     Pizza: number,
     Books: number,
     Job: number
 }
+
+// interface TransactionObj {
+//     readonly [index: string]: number
+// }
 
 const todaysTransactions: TransactionObj = {
     Pizza: -10,
@@ -308,3 +313,33 @@ console.log(todaysTransactions.Pizza)
 //Dynamically
 let prop: string = 'Pizza'
 console.log(todaysTransactions[prop])
+
+const todaysNet = (transactions: TransactionObj): number => {
+    let total = 0
+    for (const transaction in transactions) {
+        total += transactions[transaction]
+    }
+    return total
+}
+
+console.log(todaysNet(todaysTransactions))
+
+//todaysTransactions.Pizza = 40 its now read only
+
+console.log(todaysTransactions['Dave'])
+
+//////////////////////////////////
+//need to include undefined when one property is optional
+interface Student {
+    [index: string]: string | number | number[] | undefined
+    name: string,
+    GPA: number,
+    classes?: number[]
+}
+
+const student: Student = {
+    name: 'Doug',
+    GPA: 3.5,
+    classes: [100, 200]
+}
+
