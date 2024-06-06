@@ -21,10 +21,21 @@ const todaysNet = (transactions) => {
     return total;
 };
 console.log(todaysNet(todaysTransactions));
-//todaysTransactions.Pizza = 40 its now read only
-console.log(todaysTransactions['Dave']);
 const student = {
     name: 'Doug',
     GPA: 3.5,
     classes: [100, 200]
 };
+// console.log(student.test)
+// keyof creates a union type 
+for (const key in student) {
+    console.log(`${key}: ${student[key]}`);
+}
+//another way to do it.
+Object.keys(student).map(key => {
+    console.log(student[key]);
+});
+const logStudentKey = (studet, key) => {
+    console.log(`Student ${key}: ${student[key]}`);
+};
+logStudentKey(student, 'classes');

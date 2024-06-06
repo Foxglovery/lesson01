@@ -326,12 +326,14 @@ console.log(todaysNet(todaysTransactions))
 
 //todaysTransactions.Pizza = 40 its now read only
 
-console.log(todaysTransactions['Dave'])
+// console.log(todaysTransactions['Dave'])
 
 //////////////////////////////////
 //need to include undefined when one property is optional
+
+//this example shows how to iterate when interface does not have an index signature
 interface Student {
-    [index: string]: string | number | number[] | undefined
+    // [key: string]: string | number | number[] | undefined
     name: string,
     GPA: number,
     classes?: number[]
@@ -343,3 +345,18 @@ const student: Student = {
     classes: [100, 200]
 }
 
+// console.log(student.test)
+// keyof creates a union type 
+for (const key in student) {
+    console.log(`${key}: ${student[key as keyof Student]}`)
+}
+
+//another way to do it.
+Object.keys(student).map(key => {
+    console.log(student[key as keyof typeof student])
+})
+
+const logStudentKey = (studet: Student, key: keyof Student): void => {
+    console.log(`Student ${key}: ${student[key]}`)
+}
+logStudentKey(student, 'classes')
