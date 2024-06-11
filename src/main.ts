@@ -291,92 +291,112 @@
 
 // Index Signatures
 
-interface TransactionObj {
-    readonly [index: string]: number
-    Pizza: number,
-    Books: number,
-    Job: number
-}
-
 // interface TransactionObj {
 //     readonly [index: string]: number
+//     Pizza: number,
+//     Books: number,
+//     Job: number
 // }
 
-const todaysTransactions: TransactionObj = {
-    Pizza: -10,
-    Books: -5,
-    Job: 50
-}
+// // interface TransactionObj {
+// //     readonly [index: string]: number
+// // }
 
-console.log(todaysTransactions.Pizza)
-
-//Dynamically
-let prop: string = 'Pizza'
-console.log(todaysTransactions[prop])
-
-const todaysNet = (transactions: TransactionObj): number => {
-    let total = 0
-    for (const transaction in transactions) {
-        total += transactions[transaction]
-    }
-    return total
-}
-
-console.log(todaysNet(todaysTransactions))
-
-//todaysTransactions.Pizza = 40 its now read only
-
-// console.log(todaysTransactions['Dave'])
-
-//////////////////////////////////
-//need to include undefined when one property is optional
-
-//this example shows how to iterate when interface does not have an index signature
-interface Student {
-    // [key: string]: string | number | number[] | undefined
-    name: string,
-    GPA: number,
-    classes?: number[]
-}
-
-const student: Student = {
-    name: 'Doug',
-    GPA: 3.5,
-    classes: [100, 200]
-}
-
-// console.log(student.test)
-// keyof creates a union type 
-for (const key in student) {
-    console.log(`${key}: ${student[key as keyof Student]}`)
-}
-
-//another way to do it.
-Object.keys(student).map(key => {
-    console.log(student[key as keyof typeof student])
-})
-
-const logStudentKey = (studet: Student, key: keyof Student): void => {
-    console.log(`Student ${key}: ${student[key]}`)
-}
-logStudentKey(student, 'classes')
-
-
-/////////////////////////////
-// interface Incomes {
-//     [key: string]: number
+// const todaysTransactions: TransactionObj = {
+//     Pizza: -10,
+//     Books: -5,
+//     Job: 50
 // }
 
-type Streams = 'salary' | 'bonus' | 'sidehustle'
-// utility type Record allows literals
-type Incomes = Record<Streams, number | string>
+// console.log(todaysTransactions.Pizza)
 
-const monthlyIncomes: Incomes = {
-    salary: 500,
-    bonus: 100,
-    sidehustle: 250
+// //Dynamically
+// let prop: string = 'Pizza'
+// console.log(todaysTransactions[prop])
+
+// const todaysNet = (transactions: TransactionObj): number => {
+//     let total = 0
+//     for (const transaction in transactions) {
+//         total += transactions[transaction]
+//     }
+//     return total
+// }
+
+// console.log(todaysNet(todaysTransactions))
+
+// //todaysTransactions.Pizza = 40 its now read only
+
+// // console.log(todaysTransactions['Dave'])
+
+// //////////////////////////////////
+// //need to include undefined when one property is optional
+
+// //this example shows how to iterate when interface does not have an index signature
+// interface Student {
+//     // [key: string]: string | number | number[] | undefined
+//     name: string,
+//     GPA: number,
+//     classes?: number[]
+// }
+
+// const student: Student = {
+//     name: 'Doug',
+//     GPA: 3.5,
+//     classes: [100, 200]
+// }
+
+// // console.log(student.test)
+// // keyof creates a union type
+// for (const key in student) {
+//     console.log(`${key}: ${student[key as keyof Student]}`)
+// }
+
+// //another way to do it.
+// Object.keys(student).map(key => {
+//     console.log(student[key as keyof typeof student])
+// })
+
+// const logStudentKey = (studet: Student, key: keyof Student): void => {
+//     console.log(`Student ${key}: ${student[key]}`)
+// }
+// logStudentKey(student, 'classes')
+
+
+// /////////////////////////////
+// // interface Incomes {
+// //     [key: string]: number
+// // }
+
+// type Streams = 'salary' | 'bonus' | 'sidehustle'
+// // utility type Record allows literals
+// type Incomes = Record<Streams, number | string>
+
+// const monthlyIncomes: Incomes = {
+//     salary: 500,
+//     bonus: 100,
+//     sidehustle: 250
+// }
+
+// for (const revenue in monthlyIncomes) {
+//     console.log(monthlyIncomes[revenue as keyof Incomes])
+// }
+
+/////////////////////////////////////
+// GENERICS
+// const echo = (arg: string) => arg
+const echo = <T>(arg: T): T => arg
+
+const isObj = <T>(arg: T): boolean => {
+    return (typeof arg === 'object' && !Array.isArray(arg) && arg !== null)
 }
 
-for (const revenue in monthlyIncomes) {
-    console.log(monthlyIncomes[revenue as keyof Incomes])
+console.log(isObj(true))
+console.log(isObj('John'))
+console.log(isObj([1, 2, 3]))
+console.log(isObj({ name: 'John' }))
+console.log(isObj(null))
+
+
+const isTrue = <T>(arg: T): { arg: T, is: boolean } => {
+    return { arg, is: !!arg }
 }
